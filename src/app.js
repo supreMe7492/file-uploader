@@ -34,13 +34,7 @@ app.use(passport.session());
 const {usePassport} = require("../lib/passport");
 usePassport(passport);
 
-function ensureAuth(req,res,next){
-  if(req.isAuthenticated()){
-    return next()
-  }else{
-    res.redirect('/signup')
-  }
-}
+const {ensureAuth} = require('../lib/passport')
 
 app.get("/",ensureAuth,(req,res)=>{
     res.send("<h1>pussy</h1>");
@@ -50,6 +44,10 @@ app.use('/signup',signUp);
 
 const logIn = require('./routes/login');
 app.use('/login',logIn);
+
+const fileUpload = require('./routes/upload');
+app.use('/upload',ensureAuth,fileUpload);
+
 app.listen(3000,()=>{
     console.log("pussy");
 });

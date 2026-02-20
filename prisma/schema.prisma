@@ -32,7 +32,8 @@ model User {
 
 model File {
   id Int @id @default(autoincrement())
-  fileLocation String 
+  fileLocation String
+  originalName String
   uploadedAt DateTime @default(now())
   author User @relation(fields: [authorId],references: [id])
   authorId Int

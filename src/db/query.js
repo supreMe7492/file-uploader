@@ -9,4 +9,15 @@ async function signUser(userName,email,password){
     })
 }
 
-module.exports = {signUser}
+async function uploadFile(filelocation,originalName,authorid){
+    return prisma.file.create({
+        data:{
+            fileLocation: filelocation,
+            originalName: originalName,
+            authorId: authorid
+        }
+
+    })
+}
+
+module.exports = {signUser, uploadFile}
