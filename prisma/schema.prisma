@@ -28,6 +28,7 @@ model User {
  password String 
  email    String @unique
  files File[]
+ folders Folder[]
 }
 
 model File {
@@ -35,6 +36,19 @@ model File {
   fileLocation String
   originalName String
   uploadedAt DateTime @default(now())
+  author User @relation(fields: [authorId],references: [id])
+ folder  Folder? @relation(fields: [folderId],references: [id]) 
+  authorId Int
+  folderId String?
+}
+
+model Folder {
+  id        String   @id @default(uuid())
+  folderName      String
+  parentId  String?  // null = root
+  parent    Folder?  @relation("FolderToFolder", fields: [parentId], references: [id])
+  children  Folder[] @relation("FolderToFolder")
+  files     File[]
   author User @relation(fields: [authorId],references: [id])
   authorId Int
 }

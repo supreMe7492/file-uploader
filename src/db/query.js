@@ -9,15 +9,26 @@ async function signUser(userName,email,password){
     })
 }
 
-async function uploadFile(filelocation,originalName,authorid){
+async function uploadFile(filelocation,originalName,authorid,folderId){
     return prisma.file.create({
         data:{
             fileLocation: filelocation,
             originalName: originalName,
-            authorId: authorid
+            authorId: authorid,
+            folderId: folderId
         }
 
     })
 }
 
-module.exports = {signUser, uploadFile}
+async function createFolder(folderName,parentId,authorId){
+    return prisma.folder.create({
+        data:{
+            folderName: folderName,
+            parentId: parentId,
+            authorId: authorId
+
+        }
+    })
+}
+module.exports = {signUser, uploadFile,createFolder}
