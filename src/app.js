@@ -48,6 +48,9 @@ app.use('/login',logIn);
 const fileUpload = require('./routes/upload');
 app.use('/upload',ensureAuth,fileUpload);
 
+const folder = require('./routes/folder');
+app.use('/createfolder',folder);
+
 app.listen(3000,()=>{
     console.log("pussy");
 });
