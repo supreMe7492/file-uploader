@@ -51,6 +51,7 @@ app.use('/upload', ensureAuth, fileUpload);
 
 const folder = require('./routes/folder');
 app.use('/createfolder',ensureAuth,folder);
+app.use('/createfolder/:parentId',ensureAuth,folder);
 
 app.listen(3000,()=>{
     console.log("pussy");
