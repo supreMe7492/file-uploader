@@ -46,10 +46,11 @@ const logIn = require('./routes/login');
 app.use('/login',logIn);
 
 const fileUpload = require('./routes/upload');
-app.use('/upload',ensureAuth,fileUpload);
+app.use('/upload/:folderId', ensureAuth, fileUpload);
+app.use('/upload', ensureAuth, fileUpload);
 
 const folder = require('./routes/folder');
-app.use('/createfolder',folder);
+app.use('/createfolder',ensureAuth,folder);
 
 app.listen(3000,()=>{
     console.log("pussy");
